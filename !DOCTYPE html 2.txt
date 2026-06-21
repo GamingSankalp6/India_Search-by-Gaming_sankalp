@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> India Search by Gaming_Sankalp</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 100px;
+      background: #f2f2f2;
+    }
+
+    input {
+      width: 60%;
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 25px;
+      border: 1px solid gray;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 30px;
+      text-align: left;
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .box {
+      background: white;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔎 India Search by Gaming_Sankalp</h1>
+
+  <input type="text" id="searchBox" placeholder="Search something...">
+  <button onclick="search()">Search</button>
+
+  <div class="result" id="result"></div>
+
+<script>
+function search() {
+  let query = document.getElementById("searchBox").value;
+  let url = "https://api.duckduckgo.com/?q=" + query + "&format=json&pretty=1";
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      let resultDiv = document.getElementById("result");
+
+      resultDiv.innerHTML = `
+        <div class="box">
+          <h3>${data.Heading}</h3>
+          <p>${data.AbstractText}</p>
+          <a href="${data.AbstractURL}" target="_blank">${data.AbstractURL}</a>
+        </div>
+      `;
+    });
+}
+</script>
+
+</body>
+</html>
